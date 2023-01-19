@@ -1,9 +1,10 @@
-import connection from "./connection";
+import { BaseDatabase } from "./BaseDatabase";
 import { docente, estudante, turma, especialidade, docente_especialidade, hobby, estudante_hobby } from "./data";
 import { TABLE_DOCENTE, TABLE_DOCENTE_ESPECIALIDADE, TABLE_ESPECIALIDADE, TABLE_ESTUDANTE, TABLE_ESTUDANTE_HOBBY, TABLE_HOBBY, TABLE_TURMA  } from "./tableNames";
 
+
 const createTables = async () => {
-  await connection.raw(`
+  await BaseDatabase.connection.raw(`
 
   DROP TABLE IF EXISTS ${TABLE_DOCENTE},${TABLE_ESTUDANTE}, ${TABLE_DOCENTE_ESPECIALIDADE}, ${TABLE_ESPECIALIDADE}, ${TABLE_HOBBY}, ${TABLE_ESTUDANTE_HOBBY}, ${TABLE_TURMA};
 
@@ -65,51 +66,59 @@ const createTables = async () => {
     .catch((error: any) => printError(error));
 };
 
+// await BaseDatabase.connection(table_name)
+// .insert(data)
+// .then(() => {
+//     console.log(`table_name} inserido com sucesso!`);
+// })
+// .catch((error: any) => printError(error));
+
+
 const insertData = async () => {
     try {
-        await connection(TABLE_TURMA)
+        await BaseDatabase.connection(TABLE_TURMA)
         .insert(turma)
         .then(() => {
             console.log(`${TABLE_TURMA} inserido com sucesso!`);
         })
         .catch((error: any) => printError(error));
 
-        await connection(TABLE_ESTUDANTE)
+        await BaseDatabase.connection(TABLE_ESTUDANTE)
         .insert(estudante)
         .then(() => {
             console.log(`${TABLE_ESTUDANTE} inserido com sucesso!`);
         })
         .catch((error: any) => printError(error));
 
-        await connection(TABLE_DOCENTE)
+        await BaseDatabase.connection(TABLE_DOCENTE)
         .insert(docente)
         .then(() => {
             console.log(`${TABLE_DOCENTE} inserido com sucesso!`);
         })
         .catch((error: any) => printError(error));
 
-        await connection(TABLE_HOBBY)
+        await BaseDatabase.connection(TABLE_HOBBY)
         .insert(hobby)
         .then(() => {
             console.log(`${TABLE_HOBBY} inserido com sucesso!`);
         })
         .catch((error: any) => printError(error));
 
-        await connection(TABLE_ESTUDANTE_HOBBY)
+        await BaseDatabase.connection(TABLE_ESTUDANTE_HOBBY)
         .insert(estudante_hobby)
         .then(() => {
             console.log(`${TABLE_ESTUDANTE_HOBBY} inserido com sucesso!`);
         })
         .catch((error: any) => printError(error));
 
-        await connection(TABLE_ESPECIALIDADE)
+        await BaseDatabase.connection(TABLE_ESPECIALIDADE)
         .insert(especialidade)
         .then(() => {
             console.log(`${TABLE_ESPECIALIDADE} inserido com sucesso!`);
         })
         .catch((error: any) => printError(error));
 
-        await connection(TABLE_DOCENTE_ESPECIALIDADE)
+        await BaseDatabase.connection(TABLE_DOCENTE_ESPECIALIDADE)
         .insert(docente_especialidade)
         .then(() => {
             console.log(`${TABLE_DOCENTE_ESPECIALIDADE} inserido com sucesso!`);
@@ -120,12 +129,15 @@ const insertData = async () => {
         console.log(error.sqlMessage || error.message);
     } finally {
         console.log("Encerrando conexão...");
-        return connection.destroy();
+        return BaseDatabase.connection.destroy();
     }
 };
+
 
 const printError = (err: any) => {
     console.log(err.sqlMessage || err.message);
 };
 
 createTables();
+
+

@@ -1,24 +1,23 @@
 ### Endpoint de teste
-GET https://labenu-system4.onrender.com/ping
+GET http://localhost:3003/ping
 
 
 //--------------------  Endpoints Turmas
 
 ### Buscar turmas 
-GET https://labenu-system4.onrender.com/all/turmas
+GET http://localhost:3003/all/turmas
 
 ### Criar Turma
-POST https://labenu-system4.onrender.com/criar/turma
+POST http://localhost:3003/criar/turma
 Content-Type: application/json
 
 {
-
-"nome": "teste3", 
-"modulo": 2
+    "nome": "teste3", 
+    "modulo": 2
 }
 
 ### Mudar Módulo da Turma
-PUT https://labenu-system4.onrender.com/turmas
+PUT http://localhost:3003/turmas
 Content-Type: application/json
 
 {
@@ -29,39 +28,47 @@ Content-Type: application/json
 //-------------------- Endpoints Estudantes
 
 ### Buscar por nome o Estudante
-GET https://labenu-system4.onrender.com/estudante?nome=santiago
+GET http://localhost:3003/estudante/buscar?nome=santiago
 
 
 ### Buscar todos os Estudantes
-GET https://labenu-system4.onrender.com/all/estudante
+GET http://localhost:3003/estudante/all
 
 ### Criar Estudante 
-POST https://labenu-system4.onrender.com/criar/estudante
+POST http://localhost:3003/estudante/criar
 Content-Type: application/json
 
 {
-"nome": "Patrick08", 
-"email": "patrick08@gmail.com", 
+"nome": "Patrick", 
+"email": "patrick@gmail.com", 
 "data_nasc": "1994-07-10", 
 "turma_id": "001"
 }
 
+### Deletar Estudante
+DELETE http://localhost:3003/estudante/delete
+Content-Type: application/json
+
+{
+"id" : "1674139952450"
+}
+
 ### Mudar Estudante de turma  
-PUT https://labenu-system4.onrender.com/estudante
+PUT http://localhost:3003/estudante/change
 Content-Type: application/json
 
 {
 "id" : "001",
-"turma_id" : "002"
+"turma_id" : "001"
 }
 
 //-------------------- Endpoints Docentes
 
 ### Buscar todos os Docentes 
-GET https://labenu-system4.onrender.com/all/docentes
+GET http://localhost:3003/docente/all
 
 ### Criar Docente 
-POST https://labenu-system4.onrender.com/criar/docente 
+POST http://localhost:3003/criar/docente 
 Content-Type: application/json
 
 {
@@ -71,7 +78,7 @@ Content-Type: application/json
 }
 
 ### Mudar docente de turma 
-PUT https://labenu-system4.onrender.com/docentes
+PUT http://localhost:3003/docentes
 Content-Type: application/json
 
 {
